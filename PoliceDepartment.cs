@@ -13,7 +13,7 @@
 
         public void RegisterPoliceCar(string licensePlate)
         {
-            PoliceCar newCar = new PoliceCar(licensePlate);
+            PoliceCar newCar = new PoliceCar(licensePlate,this);
             policeCars.Add(newCar);
             Console.WriteLine($"Police Car with plate {licensePlate} registered to the department.");
         }

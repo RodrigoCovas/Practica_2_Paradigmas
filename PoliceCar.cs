@@ -7,12 +7,22 @@
         private bool isPatrolling;
         private SpeedRadar speedRadar;
         private bool isPursuing;
-        private string pursuingVehiclePlate;
+        private string? pursuingVehiclePlate;
+        private PoliceDepartment department;
 
-        public PoliceCar(string plate) : base(typeOfVehicle, plate)
+        public bool IsPursuing
+        {
+            get { return isPursuing; }
+            private set { isPursuing = value; }
+        }
+
+        public PoliceCar(string licensePlate, PoliceDepartment department) : base(typeOfVehicle, licensePlate)
         {
             isPatrolling = false;
+            isPursuing = false;
+            pursuingVehiclePlate = null;
             speedRadar = new SpeedRadar();
+            this.department = department;
         }
 
         public void UseRadar(Vehicle vehicle)
@@ -75,5 +85,30 @@
             pursuingVehiclePlate = vehicleLicensePlate;
             Console.WriteLine(WriteMessage($"is pursuing vehicle with plate {vehicleLicensePlate}."));
         }
+
+        public void StopPursuit()
+        {
+            isPursuing = false;
+            Console.WriteLine(WriteMessage($"stopped pursuing vehicle with plate {pursuingVehiclePlate}."));
+        }
+
+        public void NotifyDepartment()
+        {
+            if (pursuingVehiclePlate != null)
+            {
+                department.NotifyPoliceCars(pursuingVehiclePlate);
+            }
+            else
+            {
+                Console.WriteLine(WriteMessage("No vehicle is being pursued."));
+            }
+        }
+
+        // Receive alert from department
+        public void ReceiveAlert(string vehicleLicensePlate)
+        {
+            Console.WriteLine(WriteMessage($"received alert for vehicle with plate {vehicleLicensePlate}."));
+        }
+
     }
 }
