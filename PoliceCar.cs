@@ -6,6 +6,8 @@
         private const string typeOfVehicle = "Police Car";
         private bool isPatrolling;
         private SpeedRadar speedRadar;
+        private bool isPursuing;
+        private string pursuingVehiclePlate;
 
         public PoliceCar(string plate) : base(typeOfVehicle, plate)
         {
@@ -18,8 +20,8 @@
             if (isPatrolling)
             {
                 speedRadar.TriggerRadar(vehicle);
-                string meassurement = speedRadar.GetLastReading();
-                Console.WriteLine(WriteMessage($"Triggered radar. Result: {meassurement}"));
+                string measurement = speedRadar.GetLastReading();
+                Console.WriteLine(WriteMessage($"Triggered radar. Result: {measurement}"));
             }
             else
             {
@@ -67,6 +69,11 @@
             }
         }
 
-
+        public void Pursue(string vehicleLicensePlate)
+        {
+            isPursuing = true;
+            pursuingVehiclePlate = vehicleLicensePlate;
+            Console.WriteLine(WriteMessage($"is pursuing vehicle with plate {vehicleLicensePlate}."));
+        }
     }
 }

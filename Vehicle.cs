@@ -3,7 +3,7 @@
     abstract class Vehicle : IMessageWritter
     {
         private string typeOfVehicle;
-        private string plate;
+        protected string plate;
         private float speed;
 
         public Vehicle(string typeOfVehicle, string plate)
