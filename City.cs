@@ -11,11 +11,10 @@ public class City
         taxis = new List<Taxi>();
     }
 
-    public void RegisterTaxi(string licensePlate)
+    public void RegisterTaxi(Taxi newTaxi)
     {
-        Taxi newTaxi = new Taxi(licensePlate);
         taxis.Add(newTaxi);
-        Console.WriteLine($"Taxi with plate {licensePlate} registered.");
+        Console.WriteLine($"Taxi with plate {newTaxi.GetPlate()} registered.");
     }
 
     public void RemoveTaxi(string licensePlate)
@@ -32,11 +31,10 @@ public class City
         }
     }
 
-    public void RegisterPoliceCar(string licensePlate)
+    public List<Taxi> GetTaxis()
     {
-        policeDepartment.RegisterPoliceCar(licensePlate);
+        return taxis;
     }
-
     public PoliceDepartment GetPoliceDepartment()
     {
         return policeDepartment;

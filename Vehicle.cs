@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    abstract class Vehicle : IMessageWritter
+    public abstract class Vehicle : IMessageWritter
     {
         private string typeOfVehicle;
         protected string plate;

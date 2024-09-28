@@ -11,18 +11,17 @@
             alert = new Alert();
         }
 
-        public void RegisterPoliceCar(string licensePlate)
+        public void RegisterPoliceCar(PoliceCar newCar)
         {
-            PoliceCar newCar = new PoliceCar(licensePlate,this);
             policeCars.Add(newCar);
-            Console.WriteLine($"Police Car with plate {licensePlate} registered to the department.");
+            Console.WriteLine($"Police Car with plate {newCar.GetPlate()} registered to the department.");
         }
 
         public void NotifyPoliceCars(string vehicleLicensePlate)
         {
             alert.ActivateAlert(vehicleLicensePlate);
             foreach (var policeCar in policeCars)
-            {
+            {   
                 if (policeCar.IsPatrolling())
                 {
                     policeCar.Pursue(vehicleLicensePlate);

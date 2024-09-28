@@ -1,4 +1,6 @@
-﻿namespace P2
+﻿using System.ComponentModel;
+
+namespace P2
 {
     internal class Program
     {
@@ -41,49 +43,38 @@
             // Crear una ciudad
             City city = new City();
 
-            // Registrar taxis
-            city.RegisterTaxi("TAXI123");
-            city.RegisterTaxi("TAXI456");
+            Taxi taxi = new Taxi("TAXI123");
+            Taxi taxi2 = new Taxi("TAXI456");
 
-            // Registrar coches de policía
-            city.RegisterPoliceCar("POLICE123");
-            city.RegisterPoliceCar("POLICE456");
+            // Registrar taxis
+            city.RegisterTaxi(taxi);
+            city.RegisterTaxi(taxi2);
 
             // Obtener el departamento de policía para más operaciones
             PoliceDepartment department = city.GetPoliceDepartment();
 
-            // Comenzar a patrullar con un coche de policía
             PoliceCar policeCar1 = new PoliceCar("POLICE123", department);
-            policeCar1.StartPatrolling();
+            PoliceCar policeCar2 = new PoliceCar("POLICE456", department);
+            PoliceCar policeCar3 = new PoliceCar("POLICE789", department);
 
-            // Crear un taxi para medir su velocidad
-            Taxi taxi = new Taxi("TAXI123");
+            department.RegisterPoliceCar(policeCar1);
+            department.RegisterPoliceCar(policeCar2);
+            department.RegisterPoliceCar(policeCar3);
+
+            // Comenzar a patrullar con un coche de policía
+            policeCar1.StartPatrolling();
 
             // El coche de policía mide la velocidad del taxi
             policeCar1.UseRadar(taxi); // no hay infracción
 
             // Notificación de la comisaría y persecución
-            PoliceCar policeCar2 = new PoliceCar("POLICE456", department);
             policeCar2.StartPatrolling();
 
             // El taxi 2 comete una infracción
-            Taxi taxi2 = new Taxi("TAXI456");
             taxi2.StartRide();  // Ahora la velocidad del taxi 2 es 100
             policeCar2.UseRadar(taxi2); // hay infracción
 
-            // Empezar la persecución
-            policeCar2.Pursue("TAXI456");
 
-            policeCar2.NotifyDepartment();
-
-
-
-
-
-
-            // Reportar la situación actual de los coches de policía
-            Console.WriteLine(policeCar1);
-            Console.WriteLine(policeCar2);
 
         }
     }
