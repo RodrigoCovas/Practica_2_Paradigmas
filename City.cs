@@ -1,6 +1,6 @@
 using P2;
 
-public class City
+public class City: IMessageWritter
 {
     private PoliceDepartment policeDepartment;
     private List<Taxi> taxis;
@@ -14,7 +14,7 @@ public class City
     public void RegisterTaxi(Taxi newTaxi)
     {
         taxis.Add(newTaxi);
-        Console.WriteLine($"Taxi with plate {newTaxi.LicensePlate} registered.");
+        Console.WriteLine(WriteMessage($"Taxi with plate {newTaxi.LicensePlate} registered."));
     }
 
     public void RemoveTaxi(string licensePlate)
@@ -23,11 +23,11 @@ public class City
         if (taxiToRemove != null)
         {
             taxis.Remove(taxiToRemove);
-            Console.WriteLine($"Taxi with plate {licensePlate} removed.");
+            Console.WriteLine(WriteMessage($"Taxi with plate {licensePlate} removed."));
         }
         else
         {
-            Console.WriteLine($"Taxi with plate {licensePlate} not found.");
+            Console.WriteLine(WriteMessage($"Taxi with plate {licensePlate} not found."));
         }
     }
 
@@ -38,5 +38,13 @@ public class City
     public PoliceDepartment GetPoliceDepartment()
     {
         return policeDepartment;
+    }
+    public override string ToString()
+    {
+        return $"City";
+    }
+    public string WriteMessage(string message)
+    {
+        return $"{this}: {message}";
     }
 }

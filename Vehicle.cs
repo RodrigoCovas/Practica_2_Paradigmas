@@ -32,7 +32,7 @@
             this.speed = speed;
         }
 
-        //Implment interface with Vechicle message structure
+        //Implement interface with Vechicle message structure
         public string WriteMessage(string message)
         {
             return $"{this}: {message}";
