@@ -16,7 +16,7 @@
             city.RegisterTaxi(taxi2);
 
             PoliceCar policeCar1 = new PoliceCar("POLICE123", department);
-            PoliceCar policeCar2 = new PoliceCar("POLICE456", department, new SpeedRadar());
+            PoliceCar policeCar2 = new PoliceCar("POLICE456", department, (ISpeedRadar?)new SpeedRadar());
             department.RegisterPoliceCar(policeCar1);
             department.RegisterPoliceCar(policeCar2);
 

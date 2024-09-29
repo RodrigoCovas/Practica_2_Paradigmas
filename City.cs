@@ -7,7 +7,7 @@ public class City: IMessageWritter
 
     public City()
     {
-        policeDepartment = new PoliceDepartment();
+        policeDepartment = new PoliceDepartment((IAlert)new Alert());
         taxis = new List<Taxi>();
     }
 

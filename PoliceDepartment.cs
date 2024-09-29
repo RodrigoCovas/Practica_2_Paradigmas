@@ -3,12 +3,12 @@
     public class PoliceDepartment: IMessageWritter
     {
         private List<PoliceCar> policeCars;
-        private Alert alert;
+        private IAlert alert;
 
-        public PoliceDepartment()
+        public PoliceDepartment(IAlert DepartmentAlert)
         {
             policeCars = new List<PoliceCar>();
-            alert = new Alert();
+            alert = DepartmentAlert;
         }
 
         public void RegisterPoliceCar(PoliceCar newCar)

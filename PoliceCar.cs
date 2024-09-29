@@ -5,7 +5,7 @@
         //constant string as TypeOfVehicle wont change allong PoliceCar instances
         private const string typeOfVehicle = "Police Car";
         private bool isPatrolling;
-        private SpeedRadar? speedRadar;
+        private ISpeedRadar? speedRadar;
         private bool isPursuing;
         private string? pursuingVehiclePlate;
         private PoliceDepartment department;
@@ -17,7 +17,7 @@
             private set { isPursuing = value; }
         }
 
-        public PoliceCar(string licensePlate, PoliceDepartment department, SpeedRadar? radar = null) : base(typeOfVehicle)
+        public PoliceCar(string licensePlate, PoliceDepartment department, ISpeedRadar? radar = null) : base(typeOfVehicle)
         {
             isPatrolling = false;
             isPursuing = false;

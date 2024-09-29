@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public class SpeedRadar : IMessageWritter
+    public class SpeedRadar : IMessageWritter, ISpeedRadar
     {
         //Radar doesn't know about Vechicles, just speed and plates
         private string plate;
