@@ -1,6 +1,4 @@
-﻿using System.ComponentModel;
-
-namespace P2
+﻿namespace P2
 {
     internal class Program
     {
@@ -44,6 +42,13 @@ namespace P2
             // Intentar usar el radar en el coche de policía 3
             policeCar3.UseRadar(taxi); // no hay radar
             policeCar3.PrintRadarHistory(); // no hay radar
+
+            // Iniciar un scooter
+            Scooter scooter = new Scooter();
+            scooter.KickStart();
+
+            // Intentar usar el radar en el scooter
+            policeCar1.UseRadar(scooter); // no hay matricula
 
 
 

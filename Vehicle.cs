@@ -3,10 +3,10 @@
     public abstract class Vehicle : IMessageWritter
     {
         private string typeOfVehicle;
-        protected string plate;
+        protected string? plate;
         private float speed;
 
-        public Vehicle(string typeOfVehicle, string plate)
+        public Vehicle(string typeOfVehicle, string? plate = null)
         {
             this.typeOfVehicle = typeOfVehicle;
             this.plate = plate;
@@ -16,7 +16,7 @@
         //Override ToString() method with class information
         public override string ToString()
         {
-            return $"{GetTypeOfVehicle()} with plate {GetPlate()}";
+            return plate != null ? $"{GetTypeOfVehicle()} with plate {GetPlate()}" : $"{GetTypeOfVehicle()}";
         }
 
         public string GetTypeOfVehicle()
@@ -24,7 +24,7 @@
             return typeOfVehicle;
         }
 
-        public string GetPlate()
+        public string? GetPlate()
         {
             return plate;
         }
