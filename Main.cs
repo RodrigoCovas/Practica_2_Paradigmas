@@ -7,39 +7,6 @@ namespace P2
 
         static void Main()
         {
-            /*
-            Taxi taxi1 = new Taxi("0001 AAA");
-            Taxi taxi2 = new Taxi("0002 BBB");
-            PoliceCar policeCar1 = new PoliceCar("0001 CNP");
-            PoliceCar policeCar2 = new PoliceCar("0002 CNP");
-
-            Console.WriteLine(taxi1.WriteMessage("Created"));
-            Console.WriteLine(taxi2.WriteMessage("Created"));
-            Console.WriteLine(policeCar1.WriteMessage("Created"));
-            Console.WriteLine(policeCar2.WriteMessage("Created"));
-
-            policeCar1.StartPatrolling();
-            policeCar1.UseRadar(taxi1);
-
-            taxi2.StartRide();
-            policeCar2.UseRadar(taxi2);
-            policeCar2.StartPatrolling();
-            policeCar2.UseRadar(taxi2);
-            taxi2.StopRide();
-            policeCar2.EndPatrolling();
-
-            taxi1.StartRide();
-            taxi1.StartRide();
-            policeCar1.StartPatrolling();
-            policeCar1.UseRadar(taxi1);
-            taxi1.StopRide();
-            taxi1.StopRide();
-            policeCar1.EndPatrolling();
-
-            policeCar1.PrintRadarHistory();
-            policeCar2.PrintRadarHistory();
-            */
-
             // Crear una ciudad
             City city = new City();
 
@@ -53,8 +20,8 @@ namespace P2
             // Obtener el departamento de policía para más operaciones
             PoliceDepartment department = city.GetPoliceDepartment();
 
-            PoliceCar policeCar1 = new PoliceCar("POLICE123", department);
-            PoliceCar policeCar2 = new PoliceCar("POLICE456", department);
+            PoliceCar policeCar1 = new PoliceCar("POLICE123", department, new SpeedRadar());
+            PoliceCar policeCar2 = new PoliceCar("POLICE456", department, new SpeedRadar());
             PoliceCar policeCar3 = new PoliceCar("POLICE789", department);
 
             department.RegisterPoliceCar(policeCar1);
@@ -73,6 +40,10 @@ namespace P2
             // El taxi 2 comete una infracción
             taxi2.StartRide();  // Ahora la velocidad del taxi 2 es 100
             policeCar2.UseRadar(taxi2); // hay infracción
+
+            // Intentar usar el radar en el coche de policía 3
+            policeCar3.UseRadar(taxi); // no hay radar
+            policeCar3.PrintRadarHistory(); // no hay radar
 
 
 

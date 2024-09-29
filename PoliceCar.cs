@@ -5,7 +5,7 @@
         //constant string as TypeOfVehicle wont change allong PoliceCar instances
         private const string typeOfVehicle = "Police Car";
         private bool isPatrolling;
-        private SpeedRadar speedRadar;
+        private SpeedRadar? speedRadar;
         private bool isPursuing;
         private string? pursuingVehiclePlate;
         private PoliceDepartment department;
@@ -16,12 +16,12 @@
             private set { isPursuing = value; }
         }
 
-        public PoliceCar(string licensePlate, PoliceDepartment department) : base(typeOfVehicle, licensePlate)
+        public PoliceCar(string licensePlate, PoliceDepartment department, SpeedRadar? radar = null) : base(typeOfVehicle, licensePlate)
         {
             isPatrolling = false;
             isPursuing = false;
             pursuingVehiclePlate = null;
-            speedRadar = new SpeedRadar();
+            speedRadar = radar;
             this.department = department;
         }
 
@@ -29,13 +29,16 @@
         {
             if (isPatrolling)
             {
-                speedRadar.TriggerRadar(vehicle);
-                string measurement = speedRadar.GetLastReading();
-                Console.WriteLine(WriteMessage($"Triggered radar. Result: {measurement}"));
-
-                if (measurement.Contains("Catched above legal speed"))
+                if (speedRadar != null)
                 {
-                    department.NotifyPoliceCars(vehicle.GetPlate());
+                    speedRadar.TriggerRadar(vehicle);
+                    string measurement = speedRadar.GetLastReading();
+                    Console.WriteLine(WriteMessage($"Triggered radar. Result: {measurement}"));
+
+                    if (measurement.Contains("Catched above legal speed"))
+                    {
+                        department.NotifyPoliceCars(vehicle.GetPlate());
+                    }
                 }
             }
             else
@@ -77,10 +80,17 @@
 
         public void PrintRadarHistory()
         {
-            Console.WriteLine(WriteMessage("Report radar speed history:"));
-            foreach (float speed in speedRadar.SpeedHistory)
+            if (speedRadar != null && speedRadar.SpeedHistory.Any())
             {
-                Console.WriteLine(speed);
+                Console.WriteLine(WriteMessage("Report radar speed history:"));
+                foreach (float speed in speedRadar.SpeedHistory)
+                {
+                    Console.WriteLine(speed);
+                }
+            }
+            else
+            {
+                Console.WriteLine(WriteMessage("has no radar speed history."));
             }
         }
 
