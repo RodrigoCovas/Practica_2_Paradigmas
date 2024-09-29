@@ -95,6 +95,6 @@
         {
             isPursuing = false;
             Console.WriteLine(WriteMessage($"stopped pursuing vehicle with plate {pursuingVehiclePlate}."));
-        }
+        }   
     }
 }
