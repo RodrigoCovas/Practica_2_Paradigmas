@@ -1,15 +1,18 @@
 ﻿namespace P2
 {
-    public class Taxi : Vehicle
+    public class Taxi : Vehicle, IRegisteredVehicle
     {
         //constant string as TypeOfVehicle wont change allong PoliceCar instances.
         private static string typeOfVehicle = "Taxi";
         private bool isCarryingPassengers;
 
-        public Taxi(string plate) : base(typeOfVehicle, plate)
+        public string LicensePlate { get; private set; }
+
+        public Taxi(string plate) : base(typeOfVehicle)
         {
             //Values of atributes are set just when the instance is done if not needed before.
             isCarryingPassengers = false;
+            LicensePlate = plate;
             SetSpeed(45.0f);
         }
 
@@ -39,6 +42,11 @@
             {
                 Console.WriteLine(WriteMessage("is not on a ride."));
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{GetTypeOfVehicle()} with plate {LicensePlate}";
         }
     }
 }

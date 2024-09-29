@@ -17,8 +17,11 @@
 
         public void TriggerRadar(Vehicle vehicle)
         {
-            // Check if the vehicle has a plate
-            plate = vehicle.GetPlate() ?? "No plate";
+            
+            if (vehicle is IRegisteredVehicle registeredVehicle)
+            {
+                plate = registeredVehicle.LicensePlate;
+            }
             speed = vehicle.GetSpeed();
             SpeedHistory.Add(speed);
         }

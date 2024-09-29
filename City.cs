@@ -14,12 +14,12 @@ public class City
     public void RegisterTaxi(Taxi newTaxi)
     {
         taxis.Add(newTaxi);
-        Console.WriteLine($"Taxi with plate {newTaxi.GetPlate()} registered.");
+        Console.WriteLine($"Taxi with plate {newTaxi.LicensePlate} registered.");
     }
 
     public void RemoveTaxi(string licensePlate)
     {
-        Taxi? taxiToRemove = taxis.Find(t => t.GetPlate() == licensePlate);
+        Taxi? taxiToRemove = taxis.Find(t => t.LicensePlate == licensePlate);
         if (taxiToRemove != null)
         {
             taxis.Remove(taxiToRemove);

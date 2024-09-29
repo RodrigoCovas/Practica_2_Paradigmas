@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public class PoliceCar : Vehicle
+    public class PoliceCar : Vehicle, IRegisteredVehicle
     {
         //constant string as TypeOfVehicle wont change allong PoliceCar instances
         private const string typeOfVehicle = "Police Car";
@@ -9,6 +9,7 @@
         private bool isPursuing;
         private string? pursuingVehiclePlate;
         private PoliceDepartment department;
+        public string LicensePlate { get; private set; }
 
         public bool IsPursuing
         {
@@ -16,13 +17,14 @@
             private set { isPursuing = value; }
         }
 
-        public PoliceCar(string licensePlate, PoliceDepartment department, SpeedRadar? radar = null) : base(typeOfVehicle, licensePlate)
+        public PoliceCar(string licensePlate, PoliceDepartment department, SpeedRadar? radar = null) : base(typeOfVehicle)
         {
             isPatrolling = false;
             isPursuing = false;
             pursuingVehiclePlate = null;
             speedRadar = radar;
             this.department = department;
+            LicensePlate = licensePlate;
         }
 
         public void UseRadar(Vehicle vehicle)
@@ -31,13 +33,20 @@
             {
                 if (speedRadar != null)
                 {
-                    speedRadar.TriggerRadar(vehicle);
-                    string measurement = speedRadar.GetLastReading();
-                    Console.WriteLine(WriteMessage($"Triggered radar. Result: {measurement}"));
-
-                    if (measurement.Contains("Catched above legal speed"))
+                    if (vehicle is IRegisteredVehicle registeredVehicle)
                     {
-                        department.NotifyPoliceCars(vehicle.GetPlate());
+                        speedRadar.TriggerRadar(vehicle);
+                        string measurement = speedRadar.GetLastReading();
+                        Console.WriteLine(WriteMessage($"Triggered radar. Result: {measurement}"));
+
+                        if (measurement.Contains("Catched above legal speed"))
+                        {
+                            department.NotifyPoliceCars(registeredVehicle.LicensePlate);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine(WriteMessage("Cannot measure speed: Vehicle has no plate."));
                     }
                 }
             }
@@ -105,6 +114,11 @@
         {
             isPursuing = false;
             Console.WriteLine(WriteMessage($"stopped pursuing vehicle with plate {pursuingVehiclePlate}."));
-        }   
+        }
+
+        public override string ToString()
+        {
+            return $"{GetTypeOfVehicle()} with plate {LicensePlate}";
+        }
     }
 }

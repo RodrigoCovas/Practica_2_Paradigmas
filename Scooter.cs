@@ -6,7 +6,7 @@
 
         public Scooter() : base(typeOfVehicle)  // No need for plate
         {
-            SetSpeed(10f);  // Velocidad inicial del patinete
+            SetSpeed(0f);  // Velocidad inicial del patinete
         }
 
         public void KickStart()
