@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public class Breathalyzer : IMessageWriter, IMeasuringDevice
+    class Breathalyzer : IMessageWriter, IMeasuringDevice
     {
         private string plate;
         private float percentage;

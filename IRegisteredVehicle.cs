@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public interface IRegisteredVehicle
+    interface IRegisteredVehicle
     {
         string LicensePlate { get; }
     }

@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public class SpeedRadar : IMessageWriter, IMeasuringDevice
+    class SpeedRadar : IMessageWriter, IMeasuringDevice
     {
         private string plate;
         private float speed;

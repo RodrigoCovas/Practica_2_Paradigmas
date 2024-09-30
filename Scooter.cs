@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public class Scooter : Vehicle
+    class Scooter : Vehicle
     {
         private const string typeOfVehicle = "Scooter";
 
