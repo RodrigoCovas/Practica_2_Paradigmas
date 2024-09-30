@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    public class PoliceDepartment: IMessageWritter
+    public class PoliceDepartment: IMessageWriter
     {
         private List<PoliceCar> policeCars;
         private IAlert alert;

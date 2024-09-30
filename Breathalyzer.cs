@@ -1,55 +1,55 @@
 ﻿namespace P2
 {
-    public class SpeedRadar : IMessageWriter, IMeasuringDevice
+    public class Breathalyzer : IMessageWriter, IMeasuringDevice
     {
         private string plate;
-        private float speed;
-        private float legalSpeed = 50.0f;
+        private float percentage;
+        private float alcoholLimit = 0.05f;
         public List<float> history { get; private set; }
 
-        public SpeedRadar()
+        public Breathalyzer()
         {
             plate = "";
-            speed = 0f;
+            percentage = 0f;
             history = new List<float>();
         }
 
         public void TriggerDevice(Vehicle vehicle)
         {
-            
+
             if (vehicle is IRegisteredVehicle registeredVehicle)
             {
                 plate = registeredVehicle.LicensePlate;
             }
-            speed = vehicle.GetSpeed();
-            history.Add(speed);
+            percentage = vehicle.GetSpeed();
+            history.Add(percentage);
         }
 
         public string GetLastReading()
         {
-            if (speed > legalSpeed)
+            if (percentage > alcoholLimit)
             {
-                return WriteMessage("Caught above legal speed.");
+                return WriteMessage("Caught above legal alcohol percentage.");
             }
             else
             {
                 return WriteMessage("Driving legally.");
             }
         }
+
         public override string ToString()
         {
-            return "Speed Radar";
+            return "Breathalyzer";
         }
-
         public virtual string WriteMessage(string reading)
         {
             if (plate == "No plate")
             {
-                return $"Vehicle with no plate at {speed.ToString()} km/h. {reading}";
+                return $"Vehicle with no plate at {percentage.ToString()} %. {reading}";
             }
             else
             {
-                return $"Vehicle with plate {plate} at {speed.ToString()} km/h. {reading}";
+                return $"Vehicle with plate {plate} at {percentage.ToString()} %. {reading}";
             }
         }
     }

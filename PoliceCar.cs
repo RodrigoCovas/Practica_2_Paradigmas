@@ -5,7 +5,7 @@
         //constant string as TypeOfVehicle wont change allong PoliceCar instances
         private const string typeOfVehicle = "Police Car";
         private bool isPatrolling;
-        private ISpeedRadar? speedRadar;
+        private IMeasuringDevice? device;
         private bool isPursuing;
         private string? pursuingVehiclePlate;
         private PoliceDepartment department;
@@ -17,42 +17,42 @@
             private set { isPursuing = value; }
         }
 
-        public PoliceCar(string licensePlate, PoliceDepartment department, ISpeedRadar? radar = null) : base(typeOfVehicle)
+        public PoliceCar(string licensePlate, PoliceDepartment department, IMeasuringDevice? Device = null) : base(typeOfVehicle)
         {
             isPatrolling = false;
             isPursuing = false;
             pursuingVehiclePlate = null;
-            speedRadar = radar;
+            device = Device;
             this.department = department;
             LicensePlate = licensePlate;
         }
 
-        public void UseRadar(Vehicle vehicle)
+        public void UseDevice(Vehicle vehicle)
         {
             if (isPatrolling)
             {
-                if (speedRadar != null)
+                if (device != null)
                 {
                     if (vehicle is IRegisteredVehicle registeredVehicle)
                     {
-                        speedRadar.TriggerRadar(vehicle);
-                        string measurement = speedRadar.GetLastReading();
-                        Console.WriteLine(WriteMessage($"Triggered radar. Result: {measurement}"));
+                        device.TriggerDevice(vehicle);
+                        string measurement = device.GetLastReading();
+                        Console.WriteLine(WriteMessage($"Triggered {device.ToString()}. Result: {measurement}"));
 
-                        if (measurement.Contains("Catched above legal speed"))
+                        if (measurement.Contains("Caught above legal"))
                         {
                             department.NotifyPoliceCars(registeredVehicle.LicensePlate);
                         }
                     }
                     else
                     {
-                        Console.WriteLine(WriteMessage("Cannot measure speed: Vehicle has no plate."));
+                        Console.WriteLine(WriteMessage("Cannot measure: Vehicle has no plate."));
                     }
                 }
             }
             else
             {
-                Console.WriteLine(WriteMessage($"has no active radar."));
+                Console.WriteLine(WriteMessage($"has no active device."));
             }
         }
 
@@ -89,17 +89,17 @@
 
         public void PrintRadarHistory()
         {
-            if (speedRadar != null && speedRadar.SpeedHistory.Any())
+            if (device != null && device.history.Any())
             {
-                Console.WriteLine(WriteMessage("Report radar speed history:"));
-                foreach (float speed in speedRadar.SpeedHistory)
+                Console.WriteLine(WriteMessage("Report device history:"));
+                foreach (float speed in device.history)
                 {
                     Console.WriteLine(speed);
                 }
             }
             else
             {
-                Console.WriteLine(WriteMessage("has no radar speed history."));
+                Console.WriteLine(WriteMessage("has no device history."));
             }
         }
 

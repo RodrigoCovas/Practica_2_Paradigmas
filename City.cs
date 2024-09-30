@@ -1,6 +1,6 @@
 using P2;
 
-public class City: IMessageWritter
+public class City: IMessageWriter
 {
     private PoliceDepartment policeDepartment;
     private List<Taxi> taxis;

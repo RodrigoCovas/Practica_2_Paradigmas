@@ -1,6 +1,6 @@
 ﻿namespace P2
 {
-    interface IMessageWritter
+    interface IMessageWriter
     {
         string WriteMessage(string customMessage);
     }

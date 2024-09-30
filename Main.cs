@@ -16,16 +16,16 @@
             city.RegisterTaxi(taxi2);
 
             PoliceCar policeCar1 = new PoliceCar("POLICE123", department);
-            PoliceCar policeCar2 = new PoliceCar("POLICE456", department, (ISpeedRadar?)new SpeedRadar());
+            PoliceCar policeCar2 = new PoliceCar("POLICE456", department, (IMeasuringDevice?)new SpeedRadar());
             department.RegisterPoliceCar(policeCar1);
             department.RegisterPoliceCar(policeCar2);
 
             policeCar1.StartPatrolling();
-            policeCar1.UseRadar(taxi1);
+            policeCar1.UseDevice(taxi1);
 
             policeCar2.StartPatrolling();
             taxi2.StartRide();
-            policeCar2.UseRadar(taxi2);
+            policeCar2.UseDevice(taxi2);
             
             city.RemoveTaxi("TAXI123");
         }
